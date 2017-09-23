@@ -1,24 +1,28 @@
 package github.ridgelz.vendingkata
 
 import org.jetbrains.spek.api.Spek
+import org.jetbrains.spek.api.dsl.describe
 import org.jetbrains.spek.api.dsl.it
 import org.jetbrains.spek.api.dsl.on
 import org.junit.jupiter.api.Assertions.*
 
 class VendingMachineSpec : Spek({
-
-    on("receiving a coin") {
-        val vendingMachine = VendingMachine()
-        it("receives a nickel, the balance will be increased by 5 cents.") {
-            vendingMachine.insertCoin("5 grams")
-            assertEquals("$0.05", vendingMachine.balance)
+    var vendingMachine: VendingMachine = VendingMachine()
+    describe("a vending machine") {
+        beforeEachTest { vendingMachine = VendingMachine() }
+        on("receiving a nickel") {
+            it("will increase the balance by by 5 cents.") {
+                vendingMachine.insertCoin("5")
+                assertEquals("USD0.05", vendingMachine.printBalance())
+            }
         }
-        it("receives a dime, the balance will be increased by 10 cents"){
-            vendingMachine.insertCoin("2.268 grams")
-            assertEquals("0.10", vendingMachine.balance)
+        on("receiving a dime") {
+            it("will increase the balance by 10 cents") {
+                vendingMachine.insertCoin("2.268")
+                assertEquals("USD0.10", vendingMachine.printBalance())
+            }
         }
     }
-
 })
 
 
