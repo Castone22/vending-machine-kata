@@ -25,7 +25,9 @@ class VendingMachine {
     }
 
     fun printBalance(): String {
-        return formatter.format(balance)
+        var balanceString = formatter.format(balance)
+        if (balanceString == "USD0.00") balanceString = "INSERT COIN"
+        return balanceString
     }
 
 }

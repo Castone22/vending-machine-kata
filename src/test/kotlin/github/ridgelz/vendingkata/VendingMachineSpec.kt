@@ -10,6 +10,11 @@ class VendingMachineSpec : Spek({
     var vendingMachine = VendingMachine()
     describe("a vending machine") {
         beforeEachTest { vendingMachine = VendingMachine() }
+        on("not having received a coin") {
+            it("will display 'INSERT COIN'") {
+                assertEquals("INSERT COIN", vendingMachine.printBalance())
+            }
+        }
         on("receiving a nickel") {
             it("will increase the balance by by 5 cents.") {
                 vendingMachine.insertCoin("5")
