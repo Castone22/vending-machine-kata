@@ -13,6 +13,8 @@ class VendingMachine {
     var formatter: MonetaryAmountFormat = MonetaryFormats.getAmountFormat(locale)
     var validCoins: List<Coin> = Arrays.asList(NICKEL, DIME, QUARTER)
     var coinReturn: MutableCollection<Coin> = mutableListOf()
+    var productBin: MutableCollection<Product> = mutableListOf()
+    var dispensed = false
 
     fun insertCoin(s: String) {
         val coinType = findCoinByWeight(s.toDouble())
@@ -24,10 +26,20 @@ class VendingMachine {
 
     }
 
-    fun printBalance(): String {
-        var balanceString = formatter.format(balance)
-        if (balanceString == "USD0.00") balanceString = "INSERT COIN"
-        return balanceString
+    fun printDisplay(): String {
+        var displayString = formatter.format(balance)
+        if (displayString == "USD0.00") displayString = "INSERT COIN"
+        if (dispensed){
+            displayString = "THANK YOU"
+            dispensed = false
+        }
+        return displayString
+    }
+
+    fun dispense(product: Product) {
+        balance = balance.subtract(product.cost)
+        productBin.add(product)
+        dispensed = true
     }
 
 }
