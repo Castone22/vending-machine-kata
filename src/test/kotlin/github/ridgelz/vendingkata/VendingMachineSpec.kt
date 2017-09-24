@@ -85,6 +85,21 @@ class VendingMachineSpec : Spek({
                 assertEquals(listOf(Coin.QUARTER, Coin.QUARTER), vendingMachine.coinReturn)
             }
         }
+        on("using another larger balance"){
+            repeat(6){vendingMachine.insertCoin(WEIGHT_OF_QUARTER)}
+            vendingMachine.insertCoin(WEIGHT_OF_DIME)
+            vendingMachine.insertCoin(WEIGHT_OF_PENNY)
+            it("will have a cola in the product bin"){
+                vendingMachine.dispense(Product.COLA)
+                assertTrue(vendingMachine.productBin.contains(Product.COLA))
+            }
+            it("will display thank you on the screen"){
+                assertEquals("THANK YOU", vendingMachine.printDisplay())
+            }
+            it("will then dispense coins into the output matching remaining amount"){
+                assertEquals(listOf(Coin.PENNY, Coin.QUARTER, Coin.QUARTER, Coin.DIME), vendingMachine.coinReturn)
+            }
+        }
         on("selecting a cola with insufficient balance") {
             repeat(2){vendingMachine.insertCoin(WEIGHT_OF_QUARTER)}
             vendingMachine.dispense(Product.COLA)

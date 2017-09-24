@@ -44,8 +44,8 @@ class VendingMachine {
 
     fun dispense(product: Product) {
         if(balance >= product.cost) {
-            coinReturn = populateCoinReturn(product.cost)
             balance = balance.subtract(product.cost)
+            populateCoinReturn()
             productBin.add(product)
             dispensed = true
         } else {
@@ -53,9 +53,13 @@ class VendingMachine {
         }
     }
 
-    private fun populateCoinReturn(productCost: MonetaryAmount): MutableList<Coin> {
-
-        return mutableListOf(Coin.QUARTER, Coin.QUARTER)
+    private fun populateCoinReturn(){
+        for(coin in Coin.values().dropLast(1).reversed()) {
+            while(balance >= coin.value){
+                coinReturn.add(coin)
+                balance = balance.subtract(coin.value)
+            }
+        }
     }
 
 }
