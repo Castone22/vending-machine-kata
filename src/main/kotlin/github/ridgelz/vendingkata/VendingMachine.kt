@@ -15,7 +15,7 @@ class VendingMachine {
     var coinReturn: MutableCollection<Coin> = mutableListOf()
 
     fun insertCoin(s: String) {
-        val coinType = findCoinByWeight(s.toDouble())!!
+        val coinType = findCoinByWeight(s.toDouble())
         if(validCoins.contains(coinType)) {
             balance = balance.add(coinType.value)
         } else {
