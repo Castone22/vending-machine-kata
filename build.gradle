@@ -37,6 +37,7 @@ dependencies {
     testRuntime 'org.jetbrains.spek:spek-junit-platform-engine:1.1.4'
     compile "org.jetbrains.kotlin:kotlin-stdlib-jre8:$kotlin_version"
     compile group: 'org.javamoney', name: 'moneta', version: '1.0'
+    compile "org.jetbrains.kotlin:kotlin-reflect:$kotlin_version"
 
 }
 compileKotlin {
