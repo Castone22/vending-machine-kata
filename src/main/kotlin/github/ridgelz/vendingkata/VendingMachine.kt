@@ -41,7 +41,6 @@ class VendingMachine {
         return displayString
     }
 
-
     fun dispense(product: Product) {
         if(balance >= product.cost) {
             balance = balance.subtract(product.cost)
@@ -52,6 +51,11 @@ class VendingMachine {
             failedProduct = product
         }
     }
+
+    fun returnCoins() {
+        populateCoinReturn()
+    }
+
 
     private fun populateCoinReturn(){
         for(coin in Coin.values().dropLast(1).reversed()) {

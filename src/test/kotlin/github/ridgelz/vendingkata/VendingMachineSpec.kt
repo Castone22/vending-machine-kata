@@ -98,6 +98,7 @@ class VendingMachineSpec : Spek({
             }
             it("will then dispense coins into the output matching remaining amount"){
                 assertEquals(listOf(Coin.PENNY, Coin.QUARTER, Coin.QUARTER, Coin.DIME), vendingMachine.coinReturn)
+                assertEquals("INSERT COIN", vendingMachine.printDisplay())
             }
         }
         on("selecting a cola with insufficient balance") {
