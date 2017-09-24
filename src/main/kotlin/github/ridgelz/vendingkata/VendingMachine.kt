@@ -14,7 +14,8 @@ class VendingMachine {
     var validCoins: List<Coin> = Arrays.asList(NICKEL, DIME, QUARTER)
     var coinReturn: MutableCollection<Coin> = mutableListOf()
     var productBin: MutableCollection<Product> = mutableListOf()
-    var dispensed = false
+    private var dispensed = false
+    private var failedProduct: Product = Product.UNKNOWN
 
     fun insertCoin(s: String) {
         val coinType = findCoinByWeight(s.toDouble())
@@ -29,6 +30,10 @@ class VendingMachine {
     fun printDisplay(): String {
         var displayString = formatter.format(balance)
         if (displayString == "USD0.00") displayString = "INSERT COIN"
+        if (failedProduct != Product.UNKNOWN){
+            displayString = formatter.format(failedProduct.cost)
+            failedProduct = Product.UNKNOWN
+        }
         if (dispensed){
             displayString = "THANK YOU"
             dispensed = false
@@ -36,10 +41,21 @@ class VendingMachine {
         return displayString
     }
 
+
     fun dispense(product: Product) {
-        balance = balance.subtract(product.cost)
-        productBin.add(product)
-        dispensed = true
+        if(balance >= product.cost) {
+            coinReturn = populateCoinReturn(product.cost)
+            balance = balance.subtract(product.cost)
+            productBin.add(product)
+            dispensed = true
+        } else {
+            failedProduct = product
+        }
+    }
+
+    private fun populateCoinReturn(productCost: MonetaryAmount): MutableList<Coin> {
+
+        return mutableListOf(Coin.QUARTER, Coin.QUARTER)
     }
 
 }
