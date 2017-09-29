@@ -8,14 +8,14 @@ import javax.money.format.MonetaryAmountFormat
 import github.ridgelz.vendingkata.Coin.*
 
 class VendingMachine {
-    var locale: Locale = Locale.US
-    var balance: MonetaryAmount = valueOfCoin(0.00, Monetary.getCurrency(locale))
-    var formatter: MonetaryAmountFormat = MonetaryFormats.getAmountFormat(locale)
-    var validCoins: List<Coin> = Arrays.asList(NICKEL, DIME, QUARTER)
-    var coinReturn: MutableCollection<Coin> = mutableListOf()
-    var productBin: MutableCollection<Product> = mutableListOf()
+    private val locale: Locale = Locale.US
+    private val validCoins: List<Coin> = Arrays.asList(NICKEL, DIME, QUARTER)
     private var dispensed = false
     private var failedProduct: Product = Product.UNKNOWN
+    private var balance: MonetaryAmount = valueOfCoin(0.00, Monetary.getCurrency(locale))
+    val formatter: MonetaryAmountFormat = MonetaryFormats.getAmountFormat(locale)
+    val coinReturn: MutableCollection<Coin> = mutableListOf()
+    val productBin: MutableCollection<Product> = mutableListOf()
 
     fun insertCoin(s: String) {
         val coinType = findCoinByWeight(s.toDouble())
