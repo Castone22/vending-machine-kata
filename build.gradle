@@ -2,7 +2,7 @@ group 'ridgelz'
 version '1.0-SNAPSHOT'
 
 buildscript {
-    ext.kotlin_version = '1.1.4-3'
+    ext.kotlin_version = '1.1.50'
 
     repositories {
         mavenCentral()
@@ -32,7 +32,7 @@ repositories {
 }
 
 dependencies {
-    testCompile group: 'org.jetbrains.spek', name: 'spek-api', version: '1.1.4'
+    testCompile group: 'org.jetbrains.spek', name: 'spek-api', version: '1.1.5'
     testCompile group: 'org.junit.jupiter', name: 'junit-jupiter-api', version: '5.0.0'
     testRuntime 'org.jetbrains.spek:spek-junit-platform-engine:1.1.5'
     compile "org.jetbrains.kotlin:kotlin-stdlib-jre8:$kotlin_version"
